@@ -7,13 +7,16 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { useNavigate } from 'react-router-dom';
+import axiosInstance from '../axiosinterceptor';
+import Bar from './Bar';
 
-
+//no curly base if exported in default
 const Home = () => {
 
    const[courses,SetCourse]=useState([]);
    useEffect(()=>{
-    axios.get('http://localhost:3000/course/').then((res)=>{
+    axiosInstance.get('http://localhost:3000/course/').then((res)=>{
+      console.log(res.data);
       SetCourse(res.data);
     })
    },[])
@@ -21,7 +24,7 @@ const Home = () => {
 
    //Delete Course
    let deleteCourse=(p)=>{
-    axios.delete('http://localhost:3000/course/remove/'+p).then((res)=>{
+    axiosInstance.delete('http://localhost:3000/course/remove/'+p).then((res)=>{
       alert('deleted');
       window.location.reload();
     })
@@ -37,7 +40,9 @@ const Home = () => {
    const user=localStorage.getItem("username")
   
   return (
-    <div><br /><br /><br />
+    <div>
+      <Bar/>
+      <br /><br /><br />
    <Typography gutterBottom variant='h5'>Welcome {user}</Typography>
     <Grid container spacing={2} >
       {courses.map((item) => (

@@ -2,7 +2,6 @@ import { Box, Button, Stack, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import LoginIcon from '@mui/icons-material/Login';
-import './styles/loginform.css'
 import axios from 'axios';
 
 const Login = () => {
@@ -32,7 +31,7 @@ const Login = () => {
     }   
 
   return (
-    <div class="body">
+    <div>
         <Box display="flex" minHeight="80vh" >
             
         <Stack spacing={4} direction="column" sx={{ width: '300px' }} >

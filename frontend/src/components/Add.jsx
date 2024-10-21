@@ -2,6 +2,8 @@ import { Button, MenuItem, TextField } from '@mui/material'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import axiosInstance from '../axiosinterceptor';
+import Bar from './Bar';
 
 const Add = () => {
     // array and function for drop down menu
@@ -42,7 +44,7 @@ const Add = () => {
       if(location.state!=null){
         console.log("for updation")
         // item below is the object put under state in home.jsx; course is the object used to define/connect the coursefield details in the form
-        axios.put('http://localhost:3000/course/edit/'+location.state.item._id,course).then((res)=>{
+        axiosInstance.put('http://localhost:3000/course/edit/'+location.state.item._id,course).then((res)=>{
         alert("Data updated");
         navigate('/home');
       }).catch((error)=>{
@@ -51,7 +53,7 @@ const Add = () => {
      }
      else{
       console.log("inside post")
-      axios.post('http://localhost:3000/course/addcourse',course).then((res)=>{
+      axiosInstance.post('http://localhost:3000/course/addcourse',course).then((res)=>{
         navigate('/home');
       }).catch((error)=>{
         console.log(error)
@@ -72,6 +74,7 @@ const Add = () => {
      },[])
      return (
       <div>
+        <Bar/>
         <br />
         <h2>Add Course</h2><br />
         <TextField fullWidth id="outlined-basic" label="Course ID" variant="outlined"onChange={fetchValue} name="courseId" value={course.courseId}/><br /><br />

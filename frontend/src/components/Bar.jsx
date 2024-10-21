@@ -5,10 +5,15 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import AddIcon from '@mui/icons-material/Add';
 const Bar = () => {
+  const navigate=useNavigate()
+  let clearUser=()=>{
+    localStorage.removeItem("token");
+    navigate('/course')
+  }
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -28,6 +33,7 @@ const Bar = () => {
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>  </Typography>
             <Link to={'/'}><IconButton size='large' color='white'><HomeIcon/></IconButton></Link>
             <Link to={'/add'}><IconButton><AddIcon/>Add Course</IconButton></Link>
+            <Link to={'/'}><Button onClick={clearUser}>Logout</Button></Link>
           </Toolbar>
       </AppBar>
     </Box>
